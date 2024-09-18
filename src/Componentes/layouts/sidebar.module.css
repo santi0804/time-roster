@@ -1,0 +1,30 @@
+@import url('/src/index.css');
+.sidebar{
+    width: 20rem;
+    height: calc(100vh - 52px);
+    border-right: 1px solid var(--color-gris);
+    display: flex;
+    justify-content: center;
+}
+ul{
+    list-style: none;
+    padding: 1rem 2rem;
+}
+li{
+    margin-bottom: 1rem;
+}
+.links{
+    display: inline-block;
+    width: 100%;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 5px;
+}
+.links:active{
+    background-color: var(--color-gris);
+}

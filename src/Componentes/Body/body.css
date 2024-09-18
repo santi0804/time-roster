@@ -1,0 +1,14 @@
+
+/* Body.css */
+body {
+    min-height: 100vh; /* Altura mínima de la ventana */
+    background: linear-gradient(135deg, white, white); /* Gradiente de fondo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    color: #333; /* Color del texto general */
+    margin: 0;
+    padding: 0;
+  }
+  

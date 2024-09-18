@@ -1,0 +1,39 @@
+/* FormEmpleado.css */
+.container1 {
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid #241f1f;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .input {
+    width: 300px; /* Hancho de los inputs*/
+    margin-bottom: 30px;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 40px;
+    border: 1px solid #221d1e;
+  }
+  .input::placeholder {
+    text-align: center; /* Centrar el texto del placeholder */
+  }
+  
+  .button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #FF416C;
+    color: #e6e8ee;
+    border: none;
+    font-size: 20px;
+    border-radius: 25px;
+    cursor: pointer;
+  }
+  
+  .form-container button:hover {
+    background-color: #78d4e0;
+  }
+  
