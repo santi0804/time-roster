@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import './formempleado.css'
+import './FormEmpleado.css'; // Asegúrate de que el nombre del archivo CSS sea correcto
 
-
-
-function formempleado({ employees, setEmployees }) {
+function FormEmpleado({ employees, setEmployees }) {
   const [name, setName] = useState('');
-  const [documento, setDocumento] = useState(''); // Cambio de nombre a 'documento'
+  const [documento, setDocumento] = useState('');
 
   const handleAddEmployee = () => {
-    if (name && documento) { // Verificar que ambos campos estén completos
-      setEmployees([...employees, { id: employees.length + 1, name, documento }]); // Usar 'documento' en lugar de 'documentNumber'
+    if (name && documento) {
+      setEmployees([...employees, { id: employees.length + 1, name, documento }]);
       setName('');
       setDocumento('');
     } else {
@@ -19,24 +17,24 @@ function formempleado({ employees, setEmployees }) {
 
   return (
     <div className='container1'>
-      <div>
-      <input className='input' type="text" placeholder="Nombre del empleado" value={name} onChange={(e) => setName(e.target.value)}/>
-      </div>
-
-      <div>
-      <input className='input' type="number" placeholder="Documento" value={documento} onChange={(e) => setDocumento(e.target.value)} />
-      </div>
-
-      <div>
+      <h3 style={{ textAlign: 'center', marginBottom: '20px' }}>Agregar Empleado</h3>
+      <input
+        className='input'
+        type="text"
+        placeholder="Nombre del empleado"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        className='input'
+        type="number"
+        placeholder="Documento"
+        value={documento}
+        onChange={(e) => setDocumento(e.target.value)}
+      />
       <button className='button' onClick={handleAddEmployee}>Agregar Empleado</button>
     </div>
-
-    <div></div>
-
-    </div>
-
-    
   );
 }
 
-export default formempleado;
+export default FormEmpleado;

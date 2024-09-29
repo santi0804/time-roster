@@ -28,3 +28,17 @@ li{
 .links:active{
     background-color: var(--color-gris);
 }
+.logoutButton {
+    background-color: gray; /* Color de fondo para el botón de cerrar sesión */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 1.5rem; /* Espaciado superior */
+    width: 100%; /* Asegura que el botón ocupe todo el ancho */
+}
+
+.logoutButton:hover {
+    background-color: gray; /* Efecto hover */
+}

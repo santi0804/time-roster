@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "../login/login.module.css";
 import PopupError from "../popups/PopupError";
 import PopupChangeP from "../popups/PopupChange";
-import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from 'react-icons/fa';
+import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const LoginForm = ({ onLogin }) => {
@@ -31,14 +31,32 @@ const LoginForm = ({ onLogin }) => {
 
   // Función que maneja el envío del formulario de inicio de sesión
   const handleLoginSubmit = (e) => {
-    e.preventDefault(); // Evita el comportamiento predeterminado del formulario
-
-    // Simulación de autenticación. Valida si las credenciales son correctas
-    if (email === "prueba@gmail.com" && password === "contraseña123") {
-      onLogin(); // Si las credenciales son correctas, ejecuta la función 'onLogin' para autenticar
-    } else {
-      setShowErrorPopup(true); // Mostrar el popup de error
-    }
+    e.preventDefault();
+  
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Credenciales incorrectas");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Inicio de sesión exitoso:", data);
+        onLogin({ email: email }); // Cambiar para pasar los datos del usuario
+      })
+      .catch((error) => {
+        console.error("Error en la autenticación:", error);
+        setShowErrorPopup(true);
+      });
   };
 
   // Función para cerrar el popup de error
@@ -54,7 +72,6 @@ const LoginForm = ({ onLogin }) => {
   // Función para manejar el envío del formulario de recuperación de contraseña
   const handleForgotPasswordSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes manejar el envío del formulario de recuperación de contraseña
     console.log("Correo de recuperación enviado");
     setShowForgotPasswordPopup(false);
   };
@@ -63,14 +80,18 @@ const LoginForm = ({ onLogin }) => {
     <div className={styles.mainContainer}>
       {/* Mostrar popup de error si está activado */}
       {showErrorPopup && <PopupError onClose={closeErrorPopup} />}
-      
+
       {/* Mostrar popup de "Olvidaste tu contraseña" si está activado */}
       {showForgotPasswordPopup && (
         <PopupChangeP onClose={closeForgotPasswordPopup} submit={handleForgotPasswordSubmit} />
       )}
-      
-      <div className={`${styles.container} ${rightPanelActive ? styles.containerRightPanelActive : " "}`}id="container">
-        
+
+      <div
+        className={`${styles.container} ${
+          rightPanelActive ? styles.containerRightPanelActive : " "
+        }`}
+        id="container"
+      >
         {/* Formulario de registro */}
         <div className={`${styles.formContainer} ${styles.signUpContainer}`}>
           <form className={styles.formulario} action="#">
@@ -86,14 +107,16 @@ const LoginForm = ({ onLogin }) => {
                 <FaLinkedinIn />
               </Link>
             </div>
-            <span className={styles.parrafoForm}>o usa tu correo electrónico para registrarte</span>
+            <span className={styles.parrafoForm}>
+              o usa tu correo electrónico para registrarte
+            </span>
             <input className={styles.inputBox} type="text" placeholder="Nombre" />
             <input className={styles.inputBox} type="email" placeholder="Correo Electrónico" />
             <input className={styles.inputBox} type="password" placeholder="Contraseña" />
             <button className={styles.btnLog}>Regístrate</button>
           </form>
         </div>
-        
+
         {/* Formulario de inicio de sesión */}
         <div className={`${styles.formContainer} ${styles.signInContainer}`}>
           <form className={styles.formulario} onSubmit={handleLoginSubmit}>
@@ -137,28 +160,30 @@ const LoginForm = ({ onLogin }) => {
             </button>
           </form>
         </div>
-        
+
         {/* Panel de superposición */}
         <div className={styles.overlayContainer}>
           <div className={styles.overlay}>
-
             <div className={`${styles.overlayPanel} ${styles.overlayLeft}`}>
-              <h1 className={styles.tituloForm}>¡Bienvenido de nuevo Puto!</h1>
+              <h1 className={styles.tituloForm}>¡Bienvenido!</h1>
               <p className={styles.parrafo}>
                 Para mantenerte conectado con nosotros, por favor inicia sesión
                 con tu información personal
               </p>
-              <button className={styles.ghost}id="signIn"onClick={handleSignInClick}> Iniciar Sesión</button>
-            </div>
-
-            <div className={`${styles.overlayPanel} ${styles.overlayRight}`}>
-              <h1 className={styles.tituloForm}>¡Registrate, Cabrón !</h1>
-              <p className={styles.parrafo}>Ingresa tus datos personales y comienza tu viaje con nosotros</p>
-              <button className={styles.ghost}id="signUp" onClick={handleSignUpClick}>
-                Regístrate
+              <button className={styles.ghost} id="signIn" onClick={handleSignInClick}>
+                Iniciar Sesión
               </button>
             </div>
 
+            <div className={`${styles.overlayPanel} ${styles.overlayRight}`}>
+              <h1 className={styles.tituloForm}>¡Registrate!</h1>
+              <p className={styles.parrafo}>
+                Ingresa tus datos personales y comienza tu viaje con nosotros
+              </p>
+              <button className={styles.ghost} id="signUp" onClick={handleSignUpClick}>
+                Regístrate
+              </button>
+            </div>
           </div>
         </div>
       </div>

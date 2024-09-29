@@ -1,0 +1,70 @@
+/* ListaEmpleado.css */
+.container {
+    max-width: 80%;
+    margin: 2rem auto; /* Espaciado superior e inferior */
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.table th {
+    background-color: #4CAF50; /* Color verde para el encabezado */
+    color: white;
+    font-weight: bold;
+}
+
+.table tr:hover {
+    background-color: #f1f1f1; /* Color de fondo al pasar el mouse */
+}
+
+button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #78d4e0; /* Color de fondo al pasar el mouse */
+    color: white;
+}
+
+.confirm-delete {
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.confirm-delete button {
+    background-color: #FF416C; /* Color del botón de confirmación */
+    color: white;
+}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './listaempleado.css'
 
 
 function listaempleado({ employees, setEmployees }) {
