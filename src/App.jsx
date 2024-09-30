@@ -26,23 +26,24 @@ function App() {
 
     return (
         <Router>
-            <Body />
-            {isAuthenticated ? (
-                <div className="App">
-                    <Sidebar onLogout={handleLogout} /> {/* Pasa la función de logout */}
-                    <div className="content">
-                        <h2>Bienvenido, {user.email}!</h2>
-                        <Routes>
-                            <Route path="/agregar-empleado" element={<FormEmpleado employees={employees} setEmployees={setEmployees} />} />
-                            <Route path="/empleados" element={<ListaEmpleado employees={employees} setEmployees={setEmployees} />} />
-                            <Route path="/asistencia" element={<Asistencia employees={employees} attendance={attendance} setAttendance={setAttendance} />} />
-                            <Route path="/" element={<h3>Esta es la página principal.</h3>} />
-                        </Routes>
+            <Body user={user} isAuthenticated={isAuthenticated}> {/* Pasar isAuthenticated aquí */}
+                {isAuthenticated ? ( // Renderiza contenido solo si está autenticado
+                    <div className="App">
+                        <Sidebar onLogout={handleLogout} />
+                        <div className="content">
+                            
+                            <Routes>
+                                <Route path="/agregar-empleado" element={<FormEmpleado employees={employees} setEmployees={setEmployees} />} />
+                                <Route path="/empleados" element={<ListaEmpleado employees={employees} setEmployees={setEmployees} />} />
+                                <Route path="/asistencia" element={<Asistencia employees={employees} attendance={attendance} setAttendance={setAttendance} />} />
+                                <Route path="/" element={<h3>Esta es la página principal.</h3>} />
+                            </Routes>
+                        </div>
                     </div>
-                </div>
-            ) : (
-                <LoginForm onLogin={handleLogin} />
-            )}
+                ) : (
+                    <LoginForm onLogin={handleLogin} />
+                )}
+            </Body>
         </Router>
     );
 }

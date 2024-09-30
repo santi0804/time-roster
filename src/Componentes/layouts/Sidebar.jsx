@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaHome, FaChartBar } from "react-icons/fa";
+import { FaHome, FaPlus, FaClipboardList } from "react-icons/fa"; // Cambiamos el ícono a FaPlus
 import { FaUserGroup } from "react-icons/fa6";
 import Style from '../layouts/sidebar.module.css';
 
-const Sidebar = ({ onLogout }) => { // Acepta la función de logout como prop
+const Sidebar = ({ onLogout }) => {
     return (
         <div className={Style.sidebar}>
             <ul>
@@ -15,7 +15,7 @@ const Sidebar = ({ onLogout }) => { // Acepta la función de logout como prop
                 </li>
                 <li>
                     <NavLink to="/agregar-empleado" className={({ isActive }) => isActive ? `${Style.links} active` : Style.links}>
-                        <FaChartBar className='me-2' /> Agregar Empleado
+                        <FaPlus className='me-2' /> Agregar Empleado {/* Cambiado a FaPlus */}
                     </NavLink>
                 </li>
                 <li>
@@ -25,7 +25,7 @@ const Sidebar = ({ onLogout }) => { // Acepta la función de logout como prop
                 </li>
                 <li>
                     <NavLink to="/asistencia" className={({ isActive }) => isActive ? `${Style.links} active` : Style.links}>
-                        Asistencia
+                        <FaClipboardList className='me-2' /> Asistencia
                     </NavLink>
                 </li>
                 <li>

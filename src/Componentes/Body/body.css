@@ -11,4 +11,19 @@ body {
     margin: 0;
     padding: 0;
   }
-  
+  .user-menu {
+    position: absolute; /* Posición absoluta para que aparezca sobre otros elementos */
+    top: 50px; /* Ajusta la distancia desde el logo */
+    right: 20px; /* Ajusta la posición horizontal */
+    background-color: white; /* Fondo blanco para el menú */
+    border: 1px solid #ccc; /* Bordes sutiles */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    z-index: 1000; /* Asegúrate de que esté sobre otros elementos */
+}
+
+.user-menu p {
+    margin: 0; /* Eliminar margen */
+    color: #333; /* Color de texto */
+}

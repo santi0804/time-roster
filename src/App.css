@@ -39,6 +39,7 @@ h2 {
   padding: 2rem;
   width: 250px; /* Ancho fijo para la barra lateral */
   height: 100vh; /* Altura completa */
+  transition: width 0.3s; /* Transición suave para el cambio de ancho */
 }
 
 .sidebar ul {
@@ -71,4 +72,44 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.app-logo {
+  width: 100px; /* Ajusta el tamaño del logo */
+  margin: 20px; /* Espaciado alrededor del logo */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .App {
+    flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+  }
+
+  .sidebar {
+    width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+    height: auto; /* Permite que la altura se ajuste automáticamente */
+  }
+
+  .content {
+    padding: 1rem; /* Reduce el padding en contenido */
+  }
+}
+
+@media (max-width: 480px) {
+  .app-logo {
+    width: 80px; /* Reduce el tamaño del logo en pantallas muy pequeñas */
+  }
+
+  .sidebar {
+    padding: 1rem; /* Reduce el padding en la barra lateral */
+  }
+
+  .btnLogout {
+    padding: 8px 16px; /* Ajusta el tamaño del botón */
+  }
+}
+.app-logo {
+  width: 100px; /* Ajusta el tamaño del logo */
+  margin: 20px; /* Espaciado alrededor del logo */
+  cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
 }
