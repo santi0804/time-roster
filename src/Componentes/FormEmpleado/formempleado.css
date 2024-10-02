@@ -2,52 +2,38 @@
 .container1 {
   display: flex;
   flex-direction: column;
-  max-width: 400px; /* Ancho máximo para que no se vea demasiado amplio */
-  margin: 2rem auto; /* Espaciado superior e inferior */
-  padding: 40px;
-  border: 1px solid #e1e1e1; /* Borde más claro */
+  max-width: 1000px; /* Aumenta el ancho máximo para que el card sea más ancho */
+  margin: 2rem auto; /* Mantiene el card centrado horizontalmente */
+  padding: 50px; /* Padding más amplio */
+  border: 1px solid #e1e1e1;
   border-radius: 10px;
   background-color: #f9f9f9;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .input {
-  width: 100%; /* Ajustar a 100% para que ocupe el espacio del contenedor */
-  max-width: 300px; /* Mantener el ancho máximo */
-  margin-bottom: 20px; /* Espaciado entre inputs */
-  padding: 10px;
+  width: 100%; /* Mantén el 100% para que los inputs se ajusten al nuevo ancho */
+  max-width: 900px; /* Aumenta el ancho máximo de los inputs */
+  margin-bottom: 20px;
+  padding: 12px; /* Padding interno más amplio */
   font-size: 18px;
-  border-radius: 25px; /* Bordes más redondeados */
-  border: 1px solid #d1d1d1; /* Borde más suave */
-  transition: border-color 0.3s; /* Transición para el borde */
-}
-
-.input:focus {
-  border-color: #FF416C; /* Cambia el color del borde al enfocar */
-  outline: none; /* Elimina el borde predeterminado del navegador */
-}
-
-.input::placeholder {
-  text-align: center; /* Centrar el texto del placeholder */
-  color: #aaa; /* Color más claro para el placeholder */
+  border-radius: 25px;
+  border: 1px solid #d1d1d1;
+  transition: border-color 0.3s;
 }
 
 .button {
-  padding: 10px;
-  font-size: 18px; /* Ajustar tamaño de fuente */
+  padding: 12px; /* Aumenta el padding del botón */
+  font-size: 20px; /* Aumenta el tamaño de la fuente */
   background-color: #FF416C;
   color: #e6e8ee;
   border: none;
   border-radius: 25px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s; /* Transición suave */
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .button:hover {
-  background-color: #78d4e0; /* Color más claro al pasar el mouse */
-  transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
-}
-
-.button:active {
-  transform: scale(0.95); /* Efecto de presión al hacer clic */
+  background-color: #78d4e0;
+  transform: scale(1.05);
 }

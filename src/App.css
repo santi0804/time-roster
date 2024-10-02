@@ -6,31 +6,7 @@ body {
 
 .App {
   display: flex; /* Utiliza Flexbox para organizar el layout */
-}
-
-.content {
-  flex-grow: 1; /* Permite que el contenido ocupe el espacio disponible */
-  padding: 2rem;
-  background-color: white; /* Fondo blanco para el contenido */
-  border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-}
-
-h2 {
-  color: #333; /* Color de texto más oscuro */
-}
-
-.btnLogout {
-  background-color: #ff4757; /* Color de fondo para el botón de cerrar sesión */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-.btnLogout:hover {
-  background-color: #ff6b81; /* Efecto hover */
+  width: 100%;
 }
 
 .sidebar {
@@ -60,6 +36,33 @@ h2 {
   color: #ff6b81; /* Color de enlace al pasar el mouse */
 }
 
+.content {
+  flex-grow: 1; /* Permite que el contenido ocupe el espacio disponible */                       
+  padding: 2rem;
+  background-color: white; /* Fondo blanco para el contenido */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  justify-content: space-between;
+  height: 100vh; /* Altura completa del viewport */
+}
+
+h2 {
+  color: #333; /* Color de texto más oscuro */
+}
+
+.btnLogout {
+  background-color: #ff4757; /* Color de fondo para el botón de cerrar sesión */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.btnLogout:hover {
+  background-color: #ff6b81; /* Efecto hover */
+}
+
 .card {
   background: #fff;
   border-radius: 8px;
@@ -77,6 +80,7 @@ h2 {
 .app-logo {
   width: 100px; /* Ajusta el tamaño del logo */
   margin: 20px; /* Espaciado alrededor del logo */
+  cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
 }
 
 /* Media Queries */
@@ -107,9 +111,4 @@ h2 {
   .btnLogout {
     padding: 8px 16px; /* Ajusta el tamaño del botón */
   }
-}
-.app-logo {
-  width: 100px; /* Ajusta el tamaño del logo */
-  margin: 20px; /* Espaciado alrededor del logo */
-  cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
 }

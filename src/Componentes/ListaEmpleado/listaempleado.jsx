@@ -1,21 +1,43 @@
-import React, { useState } from 'react';
-import './listaempleado.css'
+import React, { useState, useEffect } from 'react';
+import './listaempleado.css';
+import axios from 'axios';
 
-
-function listaempleado({ employees, setEmployees }) {
-  // Estados para manejar la edición y eliminación
+function ListaEmpleado({ employees, setEmployees }) {
   const [editingEmployeeId, setEditingEmployeeId] = useState(null);
   const [editedName, setEditedName] = useState('');
   const [editedDocumento, setEditedDocumento] = useState('');
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [employeeToDelete, setEmployeeToDelete] = useState(null);
 
+  // Función para obtener empleados desde la base de datos
+  const fetchEmployees = () => {
+    axios.get("http://localhost:3001/empleados")
+      .then((response) => {
+        setEmployees(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener empleados:", error);
+      });
+  };
+
+  // Usar useEffect para cargar empleados al montar el componente
+  useEffect(() => {
+    fetchEmployees();
+  }, []);
+
   // Función para manejar la eliminación del empleado
   const handleDeleteEmployee = () => {
-    const updatedEmployees = employees.filter((employee) => employee.id !== employeeToDelete);
-    setEmployees(updatedEmployees);
-    setShowConfirmDelete(false); // Cerrar el cuadro de confirmación
-    setEmployeeToDelete(null); // Limpiar el estado de empleado a eliminar
+    axios.delete(`http://localhost:3001/empleados/eliminar/${employeeToDelete}`)
+
+      .then((response) => {
+        // Actualiza la lista de empleados después de eliminar
+        setEmployees(employees.filter((employee) => employee.id !== employeeToDelete));
+        setShowConfirmDelete(false); // Cerrar el cuadro de confirmación
+        setEmployeeToDelete(null); // Limpiar el estado de empleado a eliminar
+      })
+      .catch((error) => {
+        console.error("Error al eliminar el empleado:", error);
+      });
   };
 
   // Función para mostrar la ventana de confirmación de eliminación
@@ -27,21 +49,31 @@ function listaempleado({ employees, setEmployees }) {
   // Función para iniciar la edición de un empleado
   const handleEditEmployee = (employee) => {
     setEditingEmployeeId(employee.id);
-    setEditedName(employee.name);
+    setEditedName(employee.nombre); 
     setEditedDocumento(employee.documento);
   };
 
   // Función para guardar los cambios en el nombre y documento del empleado
   const handleSaveEdit = (id) => {
-    const updatedEmployees = employees.map((employee) =>
-      employee.id === id
-        ? { ...employee, name: editedName, documento: editedDocumento }
-        : employee
-    );
-    setEmployees(updatedEmployees);
-    setEditingEmployeeId(null); // Salir del modo de edición
-    setEditedName('');
-    setEditedDocumento(''); // Limpiar los campos de edición
+    axios.put(`http://localhost:3001/empleados/editar/${id}`, {
+      nombre: editedName,
+      documento: editedDocumento,
+    })
+    .then((response) => {
+      // Actualiza la lista de empleados después de editar
+      const updatedEmployees = employees.map((employee) =>
+        employee.id === id
+          ? { ...employee, nombre: editedName, documento: editedDocumento }
+          : employee
+      );
+      setEmployees(updatedEmployees);
+      setEditingEmployeeId(null); // Salir del modo de edición
+      setEditedName('');
+      setEditedDocumento(''); // Limpiar los campos de edición
+    })
+    .catch((error) => {
+      console.error("Error al editar el empleado:", error);
+    });
   };
 
   return (
@@ -71,7 +103,7 @@ function listaempleado({ employees, setEmployees }) {
                       onChange={(e) => setEditedName(e.target.value)}
                     />
                   ) : (
-                    employee.name
+                    employee.nombre 
                   )}
                 </td>
                 <td>
@@ -116,4 +148,4 @@ function listaempleado({ employees, setEmployees }) {
   );
 }
 
-export default listaempleado;
+export default ListaEmpleado;

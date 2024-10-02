@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
   --naranja: #FF416C;
@@ -6,7 +6,6 @@
   --blanco: #FFFFFF;
   --gris-claro: #eee;
   --rojo-claro: #FF416C;
-  --rojo-oscuro: #d13559;
 }
 
 .tituloForm {
@@ -22,20 +21,18 @@
   margin: 20px 0 30px;
 }
 
-.parrafoForm {
-  font-size: 12px;
-}
-
 .olvidoPass {
   color: var(--negro-claro);
   font-size: 14px;
   text-decoration: none;
   margin: 15px 0;
 }
-.olvidoPass:hover{
+
+.olvidoPass:hover {
   color: var(--naranja);
 }
-.btnLog, .ghost {
+
+.btnLog {
   border-radius: 20px;
   border: 1px solid var(--naranja);
   background-color: var(--naranja);
@@ -47,24 +44,18 @@
   text-transform: uppercase;
   transition: transform 80ms ease-in;
 }
-.btnLog:hover{
+
+.btnLog:hover {
   background-color: var(--rojo-claro);
-  transform: scale(1.1); 
+  transform: scale(1.1);
 }
+
 .btnLog:active {
   transform: scale(0.95);
 }
 
 .btnLog:focus {
   outline: none;
-}
-
-.ghost {
-  background-color: transparent;
-  border-color: var(--blanco);
-}
-.ghost:hover{
-  transform: scale(1.1);
 }
 
 .formulario {
@@ -82,149 +73,35 @@
   background-color: var(--gris-claro);
   border: none;
   padding: 12px 15px;
-  margin: 8px 0;
+  margin: 15px 0;
   width: 100%;
   color: var(--negro-claro);
   font-size: 14px;
-  text-decoration: none;
-  margin: 15px 0;
 }
-.inputBox:hover{
+
+.inputBox:hover {
   border: 0.5px solid var(--negro-claro);
 }
 
 .mainContainer {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.container {
-  background-color: var(--blanco);
-  border-radius: 10px;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-              0 10px 10px rgba(0,0,0,0.22);
-  position: relative;
-  overflow: hidden;
-  width: 768px;
-  max-width: 100%;
-  min-height: 480px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 100vh; /* Esto asegura que ocupe toda la altura de la ventana */
 }
 
 .formContainer {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  transition: all 0.6s ease-in-out;
-}
-
-.signInContainer {
-  left: 0;
-  width: 50%;
-  z-index: 2;
-}
-
-.containerRightPanelActive .signInContainer {
-  transform: translateX(100%);
-}
-
-.signUpContainer {
-  left: 0;
-  width: 50%;
-  opacity: 0;
-  z-index: 1;
-}
-
-.containerRightPanelActive .signUpContainer {
-  transform: translateX(100%);
-  opacity: 1;
-  z-index: 5;
-  animation: show 0.6s;
-}
-
-@keyframes show {
-  0%, 49.99% {
-    opacity: 0;
-    z-index: 1;
-  }
-  
-  50%, 100% {
-    opacity: 1;
-    z-index: 5;
-  }
-}
-
-.overlayContainer {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
-  transition: transform 0.6s ease-in-out;
-  z-index: 100;
-}
-
-.containerRightPanelActive .overlayContainer {
-  transform: translateX(-100%);
-}
-
-.overlay {
-  background: var(--rojo-claro);
-  background: -webkit-linear-gradient(to right, var(--naranja), var(--rojo-claro));
-  background: linear-gradient(to right, var(--naranja), var(--rojo-claro));
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 0 0;
-  color: var(--blanco);
   position: relative;
-  left: -100%;
-  height: 100%;
-  width: 200%;
-  transform: translateX(0);
-  transition: transform 0.6s ease-in-out;
+  width: 100%;
+  max-width: 400px; /* Limita el ancho del formulario */
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+              0 10px 10px rgba(0, 0, 0, 0.22);
+  padding: 40px; /* Agrega padding para un mejor espaciado */
+  /* Asegúrate de que el fondo sea blanco */
 }
 
-.containerRightPanelActive .overlay {
-  transform: translateX(50%);
-}
-
-.overlayPanel {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 10px 0 10px;
-  text-align: center;
-  top: 0;
-  height: 100%;
-  width: 50%;
-  transform: translateX(0);
-  transition: transform 0.6s ease-in-out;
-}
-
-.overlayLeft {
-  transform: translateX(-20%);
-}
-
-.containerRightPanelActive .overlayLeft {
-  transform: translateX(0);
-}
-
-.overlayRight {
-  right: 0px;
-  transform: translateX(0);
-}
-
-.containerRightPanelActive .overlayRight {
-  transform: translateX(20%);
-}
-
+/* Estilo para contenedor de redes sociales */
 .socialContainer {
   margin: 20px 0;
 }
@@ -238,40 +115,10 @@
   margin: 0 5px;
   height: 40px;
   width: 40px;
-}
-
-.social {
   color: var(--naranja);
 }
-.social:hover{
+
+.social:hover {
   color: var(--rojo-claro);
-  transform: scale(1.2);/*AGREGAR UN ZOOM */
-}
-.containerRightPanelActive {
-  .signInContainer {
-    transform: translateX(100%);
-  }
-
-  .signUpContainer {
-    transform: translateX(100%);
-    opacity: 1;
-    z-index: 5;
-    animation: show 0.6s;
-  }
-
-  .overlayContainer {
-    transform: translateX(-100%);
-  }
-
-  .overlay {
-    transform: translateX(50%);
-  }
-
-  .overlayLeft {
-    transform: translateX(0);
-  }
-
-  .overlayRight {
-    transform: translateX(20%);
-  }
+  transform: scale(1.2); /* Zoom al hacer hover */
 }

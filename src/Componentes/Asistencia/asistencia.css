@@ -99,3 +99,42 @@ body {
       padding: 10px; /* Reducir padding en el contenido */
   }
 }
+.contenedor-button {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Alinear verticalmente si es necesario */
+  gap: 10px; /* Espacio entre los botones */
+}
+
+.buttonpdf, .buttonexcel {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.buttonpdf:hover, .buttonexcel:hover {
+  background-color: #0056b3;
+}
+/* asistencia.css */
+.fondo {
+  background-image: url('../../assets/profile.png'); /* Ruta de la imagen */
+  background-size: cover; /* La imagen cubre todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  position: relative; /* Para posicionar elementos hijos correctamente */
+  height: 100vh; /* O el alto que necesites */
+  width: 100%; /* O el ancho que necesites */
+}
+
+.contenido {
+  position: relative; /* Para que esté sobre el fondo */
+  z-index: 1; /* Asegura que esté por encima del fondo */
+  background-color: rgba(255, 255, 255, 0.7); /* Fondo blanco semi-transparente */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados, opcional */
+}
+

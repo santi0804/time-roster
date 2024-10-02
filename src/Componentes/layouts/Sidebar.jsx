@@ -1,10 +1,17 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { FaHome, FaPlus, FaClipboardList } from "react-icons/fa"; // Cambiamos el ícono a FaPlus
+import { NavLink, useNavigate } from 'react-router-dom';
+import { FaHome, FaPlus, FaClipboardList, FaChartBar } from "react-icons/fa"; // Agregamos FaChartBar
 import { FaUserGroup } from "react-icons/fa6";
 import Style from '../layouts/sidebar.module.css';
 
 const Sidebar = ({ onLogout }) => {
+    const navigate = useNavigate(); // Hook para redireccionar
+
+    const handleLogout = () => {
+        onLogout(); // Llamar a la función onLogout que se pasó como prop
+        navigate('/login'); // Redirigir a la página de inicio de sesión
+    };
+
     return (
         <div className={Style.sidebar}>
             <ul>
@@ -15,7 +22,7 @@ const Sidebar = ({ onLogout }) => {
                 </li>
                 <li>
                     <NavLink to="/agregar-empleado" className={({ isActive }) => isActive ? `${Style.links} active` : Style.links}>
-                        <FaPlus className='me-2' /> Agregar Empleado {/* Cambiado a FaPlus */}
+                        <FaPlus className='me-2' /> Agregar Empleado
                     </NavLink>
                 </li>
                 <li>
@@ -29,7 +36,12 @@ const Sidebar = ({ onLogout }) => {
                     </NavLink>
                 </li>
                 <li>
-                    <button onClick={onLogout} className={Style.logoutButton}>
+                    <NavLink to="/analitica" className={({ isActive }) => isActive ? `${Style.links} active` : Style.links}>
+                        <FaChartBar className='me-2' /> Analitica {/* Nuevo enlace agregado */}
+                    </NavLink>
+                </li>
+                <li>
+                    <button onClick={handleLogout} className={Style.logoutButton}>
                         Cerrar Sesión
                     </button>
                 </li>

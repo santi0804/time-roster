@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
-import './asistencia.css'
+import './asistencia.css';
+
+import logoImg from '../../assets/profile.png'; // Importa tu imagen de logo aquí
 
 function Asistencia({ employees, attendance, setAttendance }) {
-  // Estado para manejar solicitudes, aprobaciones y empleado seleccionado
   const [requests, setRequests] = useState({});
   const [approvals, setApprovals] = useState({});
-  const [selectedEmployee, setSelectedEmployee] = useState(null); // Para almacenar el empleado seleccionado
+  const [selectedEmployee, setSelectedEmployee] = useState(null); 
 
   const handleInputChange = (event, employeeId, type) => {
     const { value } = event.target;
@@ -82,13 +83,9 @@ function Asistencia({ employees, attendance, setAttendance }) {
     const checkInDate = new Date(checkIn);
     const checkOutDate = new Date(checkOut);
     
-    // Calcula la diferencia en milisegundos entre las dos fechas
     const diffInMs = checkOutDate - checkInDate;
-    
-    // Convertir la diferencia a horas
     const diffInHours = diffInMs / (1000 * 60 * 60);
     
-    // Redondear a dos decimales
     return Math.round(diffInHours * 100) / 100;
   };
 
@@ -111,7 +108,7 @@ function Asistencia({ employees, attendance, setAttendance }) {
 
       return {
         documentNumber: employee.documento,
-        name: employee.name,
+        name: employee.nombre || employee.name,
         checkIn,
         checkOut,
         hoursWorked,
@@ -124,42 +121,54 @@ function Asistencia({ employees, attendance, setAttendance }) {
   const exportToPDF = () => {
     const doc = new jsPDF();
     const reportData = generateReportData();
-
-    doc.text('Reporte de Asistencia', 14, 20);
-    doc.autoTable({
-      head: [['Documento', 'Empleado', 'Entrada', 'Salida', 'Horas Trabajadas', 'Horas Extras', 'Ausencia']],
-      body: reportData.map((row) => [
-        row.documentNumber,
-        row.name,
-        row.checkIn,
-        row.checkOut,
-        row.hoursWorked,
-        row.overtime,
-        row.absence,
-      ]),
-    });
-
-    doc.save('reporte_asistencia.pdf');
+  
+    // Cargar la imagen que quieres agregar
+    const img = new Image();
+    img.src = logoImg; // Usa la imagen importada aquí
+    img.onload = () => {
+      const imgWidth = 50; // Ancho de la imagen
+      const imgHeight = 50; // Alto de la imagen
+      const x = (doc.internal.pageSize.getWidth() / 2) - (imgWidth / 2); // Centrar horizontalmente
+      const y = 60; // Espacio desde la parte superior
+  
+      // Dibuja la imagen en el PDF
+      doc.addImage(img, 'PNG', x, y, imgWidth, imgHeight); 
+  
+      // Agregar el título debajo de la imagen
+      doc.setFontSize(22);
+      doc.text('Reporte de Asistencia', (doc.internal.pageSize.getWidth() / 2), y + imgHeight + 10, { align: 'center' }); // Centrar título
+  
+      // Agregar la tabla debajo del título
+      doc.autoTable({
+        head: [['Documento', 'Empleado', 'Entrada', 'Salida', 'Horas Trabajadas', 'Horas Extras', 'Ausencia']],
+        body: reportData.map((row) => [
+          row.documentNumber,
+          row.name,
+          row.checkIn,
+          row.checkOut,
+          row.hoursWorked,
+          row.overtime,
+          row.absence,
+        ]),
+        startY: y + imgHeight + 20, // Ajustar la posición inicial de la tabla
+      });
+  
+      doc.save('reporte_asistencia.pdf');
+    };
   };
+
+  
 
   const exportToExcel = () => {
     const reportData = generateReportData();
+    const headers = [['Documento', 'Empleado', 'Entrada', 'Salida', 'Horas Trabajadas', 'Horas Extras', 'Ausencia']];
   
-    // Define los encabezados en español
-    const headers = [
-      ['Documento', 'Empleado', 'Entrada', 'Salida', 'Horas Trabajadas', 'Horas Extras', 'Ausencia']
-    ];
-  
-    // Convierte los datos en una hoja de cálculo sin encabezados
     const worksheet = XLSX.utils.aoa_to_sheet(headers);
-  
-    // Agrega los datos después de los encabezados
     XLSX.utils.sheet_add_json(worksheet, reportData, { skipHeader: true, origin: 'A2' });
   
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Reporte');
   
-    // Exporta el archivo Excel
     XLSX.writeFile(workbook, 'reporte_asistencia.xlsx');
   };
 
@@ -176,7 +185,7 @@ function Asistencia({ employees, attendance, setAttendance }) {
         <option value="" disabled>Selecciona un empleado</option>
         {employees.map((employee) => (
           <option key={employee.id} value={employee.id}>
-            {employee.name}
+            {employee.nombre || employee.name}
           </option>
         ))}
       </select>
@@ -184,18 +193,16 @@ function Asistencia({ employees, attendance, setAttendance }) {
       {selectedEmployee && (
         <>
           <select onChange={(e) => handleRequestChange(e, 'type')} defaultValue="">
-
             <option value="" disabled>Selecciona el tipo de solicitud</option>
             <option value="horasExtras">Horas Extras</option>
             <option value="ausencia">Ausencia</option>
           </select>
 
           {requests[selectedEmployee]?.type === 'horasExtras' && (
-            <input type="number" placeholder="Horas" onChange={(e) => handleRequestChange(e, 'hours')}/>
+            <input type="number" placeholder="Horas" onChange={(e) => handleRequestChange(e, 'hours')} />
           )}
           <button onClick={submitRequest}>Registrar Solicitud</button>
         </>
-        
       )}
       <br />
       <br />
@@ -232,7 +239,7 @@ function Asistencia({ employees, attendance, setAttendance }) {
 
             return (
               <tr key={employee.id}>
-                <td>{employee.name}</td>
+                <td>{employee.nombre || employee.name}</td>
                 <td>{employee.documento}</td>
                 <td>
                   <input
@@ -252,12 +259,12 @@ function Asistencia({ employees, attendance, setAttendance }) {
                 <td>{attendance[employee.id]?.overtime || overtime}</td>
                 <td>{absence}</td>
                 <td>
-                  <select onChange={(e) => handleApprovalChange(e, employee.id)} defaultValue="">
+                  <select onChange={(e) => handleApprovalChange(e, employee.id)}>
                     <option value="" disabled>Seleccionar</option>
                     <option value="Sí">Sí</option>
                     <option value="No">No</option>
                   </select>
-                  <button onClick={() => approveRequest(employee.id)}>Confirmar</button>
+                  <button onClick={() => approveRequest(employee.id)}>Aprobar</button>
                 </td>
               </tr>
             );

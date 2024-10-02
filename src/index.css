@@ -13,3 +13,6 @@
     box-sizing: none;
     font-family: 'Poppins', sans-serif;
 }
+body{
+    width: 100%;
+}
